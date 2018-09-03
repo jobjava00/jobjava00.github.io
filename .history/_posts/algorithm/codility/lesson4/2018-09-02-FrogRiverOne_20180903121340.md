@@ -1,0 +1,94 @@
+---
+layout: archive
+title: "FrogRiverOne"
+date: 2018-09-02
+excerpt: ""
+tags: [algorithm, codility, lesson4, Counting Elements]
+category: [algorithm/codility/lesson4]
+
+sidebar:
+  nav: "algorithm"
+---
+
+### 예문 
+* * *
+A small frog wants to get to the other side of a river. The frog is initially located on one bank of the river (position 0) and wants to get to the opposite bank (position X+1). Leaves fall from a tree onto the surface of the river.
+
+You are given an array A consisting of N integers representing the falling leaves. A[K] represents the position where one leaf falls at time K, measured in seconds.
+
+The goal is to find the earliest time when the frog can jump to the other side of the river. The frog can cross only when leaves appear at every position across the river from 1 to X (that is, we want to find the earliest moment when all the positions from 1 to X are covered by leaves). You may assume that the speed of the current in the river is negligibly small, i.e. the leaves do not change their positions once they fall in the river.
+
+For example, you are given integer X = 5 and array A such that:
+```
+  A[0] = 1
+  A[1] = 3
+  A[2] = 1
+  A[3] = 4
+  A[4] = 2
+  A[5] = 3
+  A[6] = 5
+  A[7] = 4
+```
+In second 6, a leaf falls into position 5. This is the earliest time when leaves appear in every position across the river.
+
+Write a function:
+
+class Solution { public int solution(int X, int[] A); }
+
+that, given a non-empty array A consisting of N integers and integer X, returns the earliest time when the frog can jump to the other side of the river.
+
+If the frog is never able to jump to the other side of the river, the function should return −1.
+
+For example, given X = 5 and array A such that:
+```
+  A[0] = 1
+  A[1] = 3
+  A[2] = 1
+  A[3] = 4
+  A[4] = 2
+  A[5] = 3
+  A[6] = 5
+  A[7] = 4
+```
+the function should return 6, as explained above.
+
+Write an efficient algorithm for the following assumptions:
+```
+N and X are integers within the range [1..100,000];
+each element of array A is an integer within the range [1..X].
+```
+* * *
+
+### 풀이
+* 배열 A : N개의 정수로 이루어진 배열
+* A[K] : K 시간에 한 잎이 떨어지는 위치
+* 나뭇잎 : 한번 떨어지면 움직이지 않고 고정 됨
+* 개구리 : 1 to X 까지의 모든 위치가 잎으로 덮어져 있을 때 강 건너편으로 이동할 수 있다.
+* 만약 개구리가 강을 건널 수 없다면 -1 리턴
+* X의 위치가 주어졌을 때 개구리가 강을 건널 수 있는 최소 시간을 구하라!
+
+### 제약사항
+* N,X의 범위는 정수 [1..100,000]
+* A의 각 요소의 범위는 정수 [1..X]
+
+### 코드
+``` java
+//누적합 공식 사용 : (시작숫자 + 끝숫자 ) * 끝숫자 / 2
+public int solution(int X, int[] A) {
+    int[] result = new int[X + 1];
+    int num, sum = 0;
+    int totalSum = (1 + X) * X / 2;
+    for (int i = 0; i < A.length; i++) {
+        num = A[i];
+        if (0 == result[num]) {
+            result[num] = 1;
+            sum += num;
+        }
+        if (totalSum == sum) return i;
+    }
+    return -1;
+}
+```
+
+### 결과
+* https://app.codility.com/demo/results/trainingZ9T75V-ZV2/?showingAll=1

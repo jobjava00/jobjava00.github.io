@@ -1,0 +1,15 @@
+--- 
+permalink: /algorithm/codility/
+title: "Codility"
+author_profile: true
+
+sidebar:
+  nav: "algorithm"
+---
+<ul>
+{% for post in site.posts %}
+{% if post.categories contains "algorithm/codility/iterations" %}
+<li>{{post.title}}</li>
+{% endif %}
+{% endfor %}
+</ul>

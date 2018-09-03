@@ -1,0 +1,17 @@
+# main links
+main:
+  - title: "Algorithm"
+    url: /algorithm/
+
+algorithm:
+  - title: "Codility"
+    url: /algorithm/codility/
+    children:
+      - title: "lesson1"
+        url: /algorithm/codility/lesson1/
+      - title: "lesson2"
+        url: /algorithm/codility/lesson2/
+      - title: "lesson3"
+        url: /algorithm/codility/lesson3/
+      - title: "lesson4"
+        url: /algorithm/codility/lesson4/

@@ -1,0 +1,17 @@
+--- 
+layout: archive
+comments: false
+permalink: /algorithm/codility/lesson2
+title: "Lesson2"
+
+sidebar:
+  nav: "algorithm"
+---
+<ul>
+{% for post in site.posts %}
+{% if post.tags contains "codility" and post.tags contains "lesson2" %}
+<h2 class="archive__item-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+<p class="archive__item-excerpt">{{ post.excerpt }}</p>
+{% endif %}
+{% endfor %}
+</ul>

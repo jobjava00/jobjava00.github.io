@@ -1,0 +1,14 @@
+---
+layout: categories
+title: Blog
+category: algorithm/codility/iterations
+
+---
+
+{{ content }}
+
+{% for post in site.categories[page.category.algorithm.codility.iterations] %}
+    <a href="{{ post.url | absolute_url }}">
+      {{ post.title }} 111
+    </a>
+{% endfor %}

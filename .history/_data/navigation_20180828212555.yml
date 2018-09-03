@@ -1,0 +1,13 @@
+# main links
+main:
+  - title: "Algorithm"
+    url: /collection/algorithm/
+
+algorithm:
+  - title: "Codility"
+    url: /collection/algorithm/codility/
+    children:
+      - title: "iterations"
+        url: /collection/algorithm/codility/iterations/
+      - title: "arrays"
+        url: /collection/algorithm/codility/arrays/
