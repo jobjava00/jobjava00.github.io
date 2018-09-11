@@ -1,0 +1,98 @@
+---
+layout: archive
+title: "[Codility] Sorting - Triangle 풀이"
+date: 2018-09-10
+excerpt: ""
+tags: [algorithm, codility, lesson6, Triangle]
+category: [algorithm/codility/lesson6]
+
+sidebar:
+  nav: "algorithm"
+---
+
+### 예문 
+* * *
+An array A consisting of N integers is given. A triplet (P, Q, R) is triangular if 0 ≤ P < Q < R < N and:
+```
+A[P] + A[Q] > A[R],
+A[Q] + A[R] > A[P],
+A[R] + A[P] > A[Q].
+```
+For example, consider array A such that:
+```
+  A[0] = 10    A[1] = 2    A[2] = 5
+  A[3] = 1     A[4] = 8    A[5] = 20
+```
+Triplet (0, 2, 4) is triangular.
+
+Write a function:
+
+class Solution { public int solution(int[] A); }
+
+that, given an array A consisting of N integers, returns 1 if there exists a triangular triplet for this array and returns 0 otherwise.
+
+For example, given array A such that:
+```
+  A[0] = 10    A[1] = 2    A[2] = 5
+  A[3] = 1     A[4] = 8    A[5] = 20
+```
+the function should return 1, as explained above. Given array A such that:
+```
+  A[0] = 10    A[1] = 50    A[2] = 5
+  A[3] = 1
+```
+the function should return 0.
+
+Write an efficient algorithm for the following assumptions:
+```
+N is an integer within the range [0..100,000];
+each element of array A is an integer within the range [−2,147,483,648..2,147,483,647].
+```
+* * *
+
+### 해석
+* A : N개의 정수로 구성 된 배열
+* (P, Q, R)이 삼각형일 때
+```
+0 ≤ P < Q < R < N
+A[P] + A[Q] > A[R],
+A[Q] + A[R] > A[P],
+A[R] + A[P] > A[Q].
+```
+* 배열에 삼각형이 있으면 1, 없으면 0을 리턴하라!
+
+### 풀이
+* 배열 크기가 3이하 일 경우 처리 필요
+* 각 요소의 범위가 정수 최소 ~ 최대 이므로 더했을 경우 long 형으로 처리해야 함
+* 정렬을 우선 한다.
+* 정렬 된 상태 이면 아래는 무조건 만족하므로 A[P] + A[Q] > A[R] 에 대해서만 체크함.
+```
+A[R] + A[P] > A[Q] (첫번째, 마지막 합은 중간보다 항상 큼)
+A[Q] + A[R] > A[P] (중간, 마지막 합은 첫번째보다 항상 큼)
+```
+
+### 제약사항
+* N의 범위는 정수 [0..100,000]
+* 배열A의 각 요소의 범위는 정수 [−2,147,483,648..2,147,483,647]
+
+### 코드
+``` java
+
+import java.util.Arrays;
+public int solution(int[] A) {
+  int N = A.length;
+  if (3 > N) return 0;
+
+  Arrays.sort(A);
+
+  for (int i = 0; i < N - 2; i++) {
+    long P = A[i], Q = A[i + 1], R = A[i + 2];
+    if (P + Q > R) return 1;
+  }
+  return 0;
+}
+
+```
+
+### 결과
+* https://app.codility.com/demo/results/training6JU3SE-AN9/?showingAll=1
