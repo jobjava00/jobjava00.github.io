@@ -26,6 +26,8 @@ algorithm:
   - title: "Hackerrank"
     url: /algorithm/hackerrank/
     children:
-      - title: "strings"
-        url: /algorithm/hackerrank/strings/
-        
+      - title: "practice"
+        url: /algorithm/hackerrank/practice/
+        children:
+        - title: "strings"
+          url: /algorithm/hackerrank/practice/strings/
