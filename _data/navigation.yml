@@ -28,4 +28,6 @@ algorithm:
     children:
       - title: "strings"
         url: /algorithm/hackerrank/strings/
+      - title: "structures"
+        url: /algorithm/hackerrank/structures/
         
