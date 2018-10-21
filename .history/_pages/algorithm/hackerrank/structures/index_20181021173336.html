@@ -1,14 +1,14 @@
 ---
 layout: archive
 comments: false
-permalink: /algorithm/hackerrank/
+permalink: /algorithm/hackerrank/structures
 title: "Hackerrank"
 
 sidebar:
-  nav: "hackerrank"
+nav: "hackerrank"
 ---
 {% for post in site.posts %}
-{% if post.tags contains "hackerrank" %}
+{% if post.tags contains "hackerrank" and post.tags contains "structures" %}
 <div class="list__item">
   <h2 class="archive__item-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
   <p class="page__meta">
