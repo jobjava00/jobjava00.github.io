@@ -1,9 +1,25 @@
 # main links
 main:
+  - title: "Java"
+    url: /java/
   - title: "Algorithm"
     url: /algorithm/
+  - title: "Book"
+    url: /book/
+
+java:
+  - title: "Language"
+    url: /java/language/
+  - title: "Framework"
+    url: /java/framework/
 
 algorithm:
+  - title: "Codility"
+    url: /algorithm/codility/
+  - title: "Hackerrank"
+    url: /algorithm/hackerrank/
+        
+codility:
   - title: "Codility"
     url: /algorithm/codility/
     children:
@@ -23,3 +39,12 @@ algorithm:
         url: /algorithm/codility/lesson7/
       - title: "lesson8"
         url: /algorithm/codility/lesson8/
+
+hackerrank:
+  - title: "Hackerrank"
+    url: /algorithm/hackerrank/
+    children:
+      - title: "strings"
+        url: /algorithm/hackerrank/strings/
+      - title: "structures"
+        url: /algorithm/hackerrank/structures/

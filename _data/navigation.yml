@@ -1,7 +1,17 @@
 # main links
 main:
+  - title: "Java"
+    url: /java/
   - title: "Algorithm"
     url: /algorithm/
+  - title: "Book"
+    url: /book/
+
+java:
+  - title: "Language"
+    url: /java/language/
+  - title: "Framework"
+    url: /java/framework/
 
 algorithm:
   - title: "Codility"
