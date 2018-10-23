@@ -13,12 +13,12 @@ language:
 
 java:
   - title: "Basic"
-    url: /language/java/basic/
+    url: /language/java/basic
   - title: "Framework"
-    url: /language/java/framework/
+    url: /language/java/framework
     children:
       - title: "spring"
-        url: /language/java/framework/spring/
+        url: /language/java/framework/spring
 
 algorithm:
   - title: "Codility"
