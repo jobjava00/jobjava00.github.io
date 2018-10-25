@@ -1,0 +1,93 @@
+---
+layout: archive
+title: "[Hackerrank] Data Structures - ArrayList 풀이"
+date: 2018-10-15
+excerpt: ""
+tags: [algorithm, hackerrank, structures, arrayList]
+category: [algorithm/hackerrank/structures]
+
+sidebar:
+  nav: "hackerrank"
+---
+
+# 예문
+
+---
+
+<https://www.hackerrank.com/challenges/java-arraylist/problem>
+
+Sample Input
+
+```markdown
+5
+5 41 77 74 22 44
+1 12
+4 37 34 36 52
+0
+3 20 22 33
+5
+1 3
+3 4
+3 1
+4 3
+5 5
+```
+
+Sample Output
+
+```markdown
+74
+52
+37
+ERROR!
+ERROR!
+```
+
+Explanation
+
+![ArrayList01](/assets/image/algorithm/hackerrank/ArrayList01.png)
+
+---
+
+## 해석
+
+- ArrayList
+
+## 풀이
+
+- ArrayList 를 배열에 담아서 이중 arrayList 형식으로 사용..
+- - ArrayList 의 개수를 알면 배열로 담는게 나은듯 하다.
+
+## 제약사항
+
+## 코드
+
+```java
+public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    int n = scanner.nextInt();
+    int d, q, x, y;
+
+    ArrayList[] arrayList = new ArrayList[n];
+
+    for (int i = 0; i < n; i++) {
+        d = scanner.nextInt();
+        arrayList[i] = new ArrayList();
+
+        for (int j = 0; j < d; j++) {
+            arrayList[i].add(scanner.nextInt());
+        }
+    }
+
+    q = scanner.nextInt();
+    for (int i = 0; i < q; i++) {
+        x = scanner.nextInt();
+        y = scanner.nextInt();cc
+        try {
+            System.out.println(arrayList[x - 1].get(y - 1));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("ERROR!");
+        }
+    }
+}
+```

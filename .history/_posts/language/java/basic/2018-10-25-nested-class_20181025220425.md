@@ -1,0 +1,203 @@
+---
+layout: archive
+title: "자바 4대 중첩 클래스(nested class)"
+date: 2018-10-25
+excerpt: ""
+tags: [language, java, basic, Nested Class]
+category: [language/java/basic]
+#read_time: true
+#share: true
+
+sidebar:
+  nav: "language"
+---
+
+# 정리
+
+* * *
+
+## 중첩 클래스
+
+* 클래스안에 또다른 클래스가 정의되는 것
+* 특정 클래스를 자신의 클래스 내부적인 용도로만 사용하고자 할때 효율적
+* 중첩클래스를 포함하는 외부 클래스를 Outer 클래스라고 하며 내부에 포함된 클래스를 중첩클래스 또는 Inner 클래스라고 함.
+
+## Inner 클래스의 특징
+
+* Outer 클래스의 멤버를 마치 자신의 멤버처럼 사용할 수 있다. 접근지정자가 private 라고 해도 접근 가능
+* Inner 클래스 안에는 static 변수를 선언할 수 없다. 단, static Inner 클래스는 선언 가능
+* Inner 클래스의 접근은 반드시 Outer 클래스를 통해서 접근 할 수 있다. 단, static Inner 를래스는 바로 접근 가능
+  * 소스파일을 컴파일하면 Outer$Inner.class 형식으로 생성
+
+## Inner 클래스 종류
+
+| 구분      | 설명                                                      |
+|-----------|-----------------------------------------------------------|
+| member    | Outer 클래스의 멤버변수나 메소드처럼 클래스가 정의된 경우 |
+| local     | Outer 클래스의 특정 메소드안에서 클래스가 정의된 경우     |
+| static    | static 키워드를 이용해서 클래스가 정의된 경우             |
+| anonymous | 익명 클래스를 이용해서 클래스가 정의된 경우               |
+
+## member Inner 클래스
+
+* 객체를 생성해야만 사용할 수 있는 멤버들과 같은 형태로 정의한 클래스
+* Inner 클래스를 사용하기 위해서는 반드시 Outer 클래스를 객체 생성해야 함
+
+### member Inner 클래스 형식
+
+```java
+public class Outer {
+  ...
+  class Inner{
+  }
+  ...
+}
+```
+
+### member Inner 클래스 사용예
+
+```java
+public class Outer {
+  int a = 10;
+  private int b = 20;
+  static int c = 30;
+
+  // Inner class
+  class Inner {
+    public void print() {
+      System.out.println(a + " " + b + " " + c);
+    }
+  }
+
+  public static void main(String[] args) {
+    Outer outer = new Outer();
+    Outer.Inner inner = outer.new Inner();
+    inner.print();
+  }
+}
+```
+
+## local Inner 클래스
+
+* Outer 클래스의 메소드 안에서 정의한 클래스를 의미
+* 메소드 안에서 정의되었기 때문에 로컬변수처럼 인식
+* 메소드가 호출될 때 생성되며 메소드가 종료될 때 삭제 됨
+
+### local Inner 클래스 형식
+
+```java
+public class Outer {
+  ..
+  public void outerMethod(){
+    class Inner{ }
+  }
+}
+```
+
+### local Inner 클래스 사용예
+
+```java
+public class Outer {
+  int a = 10;
+  private int b = 20;
+  static int c = 30;
+
+  public void outerMethod() {
+
+    // Inner class
+    class Inner {
+      public void print() {
+        System.out.println(a + " " + b + " " + c);
+      }
+    }
+
+    Inner i = new Inner();
+    i.print();
+  }
+
+  public static void main(String[] args) {
+    Outer outer = new Outer();
+    outer.outerMethod();
+  }
+}
+```
+
+## static Inner 클래스
+
+* Inner 클래스를 정의할 때 static 키워드를 사용
+* 일반 Inner 클래스내에는 static 변수를 포함할 수 없지만, static Inner 클래스로 정의하면 가능
+* Outer 클래스를 객체 생성하지 않아도 Inner 클래스에 접근이 가능
+* Outer 클래스의 멤버변수와 pirvate 로 선언된 변수는 접근이 불가능
+
+### static Inner 클래스 형식
+
+```java
+public class Outer {
+  ...
+  static class Inner{
+  }
+  ...
+}
+```
+
+### static Inner 클래스 사용예
+
+```java
+public class Outer {
+  int a = 10;
+  private int b = 20;
+  static int c = 30;
+
+  static class Inner{
+    static int d = 40;  // static 변수 선언 가능
+    public void print(){
+      System.out.println(c); // Outer 클래스의 static 변수만 접근 가능하고 a, b 변수는 접근 불가
+    }
+    public static void staticPrint(){ // static 메소드 선언
+      System.out.println(c);
+    }
+
+  }
+
+  public static void main(String[] args) {
+    Outer.Inner inner = new Outer.Inner();
+    inner.print();
+
+    System.out.println(Outer.Inner.d); // static 변수에 대한 접근
+    Outer.Inner.staticPrint(); // static 메소드에 대한 접근
+  }
+}
+```
+
+## anonymous Inner 클래스
+
+* local Inner 클래스의 변형된 형태
+* 클래스명을 가지지 않으며 단지 객체 생성과 메소드 선언만을 정의
+* 일반적으로 인터페이스 또는 추상클래스를 구현하는 클래스로 자주 사용
+
+### anonymous Inner 클래스 사용예
+
+```java
+interface Student {
+  public void getInfo();
+}
+
+public class Test {
+  public static void main(String[] args) {
+
+    // anonymous 클래스
+    Student student = new Student() {
+
+      // getInfo 메소드 구현
+      public void getInfo() {
+        System.out.println("anonymous class");
+      }
+    };
+    student.getInfo();
+  }
+}
+```
+
+## 참고
+
+* <http://ccm3.net/archives/20638>
