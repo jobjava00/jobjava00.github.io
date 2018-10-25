@@ -1,0 +1,175 @@
+---
+layout: archive
+title: "Singleton 생성 방법"
+date: 2018-10-25
+excerpt: ""
+tags: [language, java, basic, singleton]
+category: [language/java/basic]
+#read_time: true
+#share: true
+
+sidebar:
+  nav: "language"
+---
+
+# 정리
+
+* * *
+
+## Eager initialization (이른 초기화 방식)
+
+```java
+public class Singleton {
+
+  private static Singleton instance = new Singleton();
+  
+  private Singleton() {}
+
+  public static Singleton getInstance() {
+      return instance;
+  }
+}
+```
+
+* 싱글톤 객체를 미리 생성하는 기본적인 Singleton 방식
+* 장점
+  * 클래스 로더에 의해 클래스가 최초 로딩 될 때 객체 생성됨으로 Thread-safe
+* 단점
+  * 싱글톤객체 사용유무와 관계 없이 클래스 로딩 시점에 생성 되기 때문에 메모리를 항상 점유하고 있어서 비효율적
+
+## Lazy initialization (늦은 초기화 방식)
+
+```java
+public class Singleton {
+
+    private static Singleton instance;
+
+    private Singleton(){}
+
+    public static Singleton getInstance(){
+        if(instance == null){
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+```
+
+* 장점
+  * 싱글톤 객체가 필요할 때 인스턴스 생성
+  * 메모리 누수 방지
+* 단점
+  * muilti thread 방식에서는 안전하지 않음
+  * 동일 시점에 getInstance() 호출 시 인스턴스가 두 번 생길 위험이 있음
+
+## Thread safe Lazy initialization (스레드 안전한 늦은 초기화)
+
+``` java
+public class Singleton {
+
+    private static Singleton instance;
+
+    private Singleton(){}
+
+    public static Singleton getInstance(){
+        //Double-checked locking
+        if(instance == null){
+            synchronized (Singleton.class) {
+                if(instance == null)
+                    instance = new Singleton();
+            }
+
+        }
+        return instance;
+    }
+}
+```
+
+* 장점
+  * Lazy initialization 방식에서 thread-safe하지 않은 점을 보완
+* 단점
+  * synchronized 사용 시 내부적으로 많은 cost 발생
+  * 많은 thread 들이 getInstance()를 호출하게 되면 프로그램 전반적인 성능저하가 발생
+
+## DCL(Double Checked Locking)
+
+```java
+public class Singleton {
+  private volatile static Singleton instance;
+  
+  private Singeton() {}
+  
+  public static Singleton getInstance() {
+    if (instance == null)  {
+        synchronized(Singleton.class) {
+          if (instance == null) {
+              instance == new Singleton();  
+          }
+        }
+    }
+    return instance;
+  }
+}
+```
+
+* Thread safe Lazy initialization 의 성능저하를 보완 한 방법
+* 현재 broken idiom, 사용 권고하지 않음
+* DCL 는 자바 1.4 이전 버전에서는 사용할 수 없음
+  * 자바 1.4 이전의 JVM 에서는 volatile 키워드를 사용하더라도 동기화가 잘 되지 않을 수 있음
+
+## Enum initialization (Enum 초기화)
+
+```java
+public enum Singleton {
+    INSTANCE;
+    public static Singleton getInstance() {
+        return INSTANCE;
+    }
+}
+```
+
+* 모든 enum type들은 프로그램 내에서 한번만 초기화되는 점을 이용해 싱글톤을 구현
+* 장점
+  * 리플렉션을 통해 싱글톤을 깨트리는 공격에 안전
+  * 직렬화 보장
+* 단점
+  * 싱글톤 초기화 과정에 다른 의존성이 끼어들 가능성이 높다.
+  * Enum 초기화는 컴파일 타임에 결정되므로 매번 메소드 등을 호출할 때 Context 정보를 넘겨야 하는 비효율적 상황이 발생 할 수 있다.
+
+## Initialization on demand holder idiom (holder에 의한 초기화)
+
+```java
+public class Singleton {
+  
+  private Singleton() {}
+  
+  public static Singleton getInstance() {
+    return LazyHolder.INSTANCE;
+  }
+  
+  private static class LazyHolder {
+    private static final Singleton INSTANCE = new Singleton();  
+  }
+}
+```
+
+* 현재까지 가장 많이 사용되는 방법
+* 장점
+  * Singleton 클래스에는 LazyHolder 클래스의 변수가 없기 때문에 Singleton 클래스 로딩 시 LazyHolder 클래스를 초기화하지 않음
+  * Class를 로딩하고 초기화하는 시점은 thread-safe를 보장
+  * holder 안에 선언된 instance가 static이기 때문에 클래스 로딩 시점에 한번만 호출
+    * final을 써서 다시 값이 할당되지 않도록 함
+* 단점
+  * 리플렉션을 이용한 내부 생성자 호출 가능
+  * 역직렬화가 수행될 때마다 새로운 객체 생성
+
+## 결론
+
+* LaszHolder : 성능이 중요시 되는 환경
+* Enum : 직렬화, 안정성 중요시 되는 환경
+
+## 참고
+
+* <https://medium.com/@joongwon/multi-thread-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C%EC%9D%98-%EC%98%AC%EB%B0%94%EB%A5%B8-singleton-578d9511fd42>
+* <https://blog.seotory.com/post/2016/03/java-singleton-pattern>
+* <http://plposer.tistory.com/64>
