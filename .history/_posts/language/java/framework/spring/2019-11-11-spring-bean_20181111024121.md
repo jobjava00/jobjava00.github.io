@@ -1,0 +1,94 @@
+---
+layout: archive
+title: "스프링 Bean"
+date: 2018-11-11
+excerpt: ""
+tags: [language, java, framework, spring, 스프링 Bean]
+category: [language/java/framework/spring]
+#read_time: true
+#share: true
+
+sidebar:
+  nav: "java"
+---
+
+# 정리
+
+* * *
+
+## Bean
+
+* Spring Framework에서 관리하는 오브젝트, 즉 하나의 독립적인 단위로서의 객체
+
+### Bean의 생명주기
+
+* 인터페이스 구현
+  * InitaializingBean은 초기화를, DisposableBean을 소멸을 담당하는 인터페이스
+
+```java
+public interface InitializingBean{
+      void afterPropertiesSet() throws Exception;
+}
+
+public interface DisposableBean{
+      void destroy() throws Exception; 
+}
+
+public class SimpleClass implements InitializingBean, DisposableBean{
+    @Override
+    public void afterPropertiesSet() throws Exception{
+        // Bean 생성 및 초기화를 담당한다.
+    }
+    @Override
+    public void destroy() throws Exception{
+        // Bean 소멸을 담당한다.
+    }
+}
+```
+
+* 메서드 지정
+  * XML설정 파일에서 bean을 정의할 때 생성 및 소멸을 소유권을 통해 지정할 수도 있다.
+
+```java
+<bean id="simpleBean" class="com.spring.bean.BSimpleClass" init-method="init" destroy-method="destroy" />
+
+@Bean(initMethod = "init", destroyMethod = "destroy")
+public ConnPool3 connPool3(){
+    return new ConnPool3();
+}
+```
+
+* 어노테이션의 사용
+
+```java
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+public class SimpleClass{
+
+    @PostConstruct
+    public void init(){
+        // Bean 생성 및 초기화
+    }
+
+    @PreDestroy
+    public void destroy(){
+        // Bean 소멸
+    }
+}
+```
+
+### Bean Scope
+
+| Scope       | 정의                                                                    |
+|-------------|-------------------------------------------------------------------------|
+| Singleton Scope  | 스프링 IoC 컨테이너 당 하나의 객체 인스턴스에 하나의 빈을 정의한 스코프 |
+| Prototype Scope  | 필요한 매 순간 새로운 bean 객체가 생성                     |
+| 리퀘스트    | 한 HTTP 요청의 생명주기에 하나의 빈을 정의한 스코프                     |
+| 세션        | 한 HTTP 세션의 생명주기에 하난의 빈을 정의한 스코프                     |
+| 글로벌 세션 | 한 글로벌 HTTP 세션의 생명주기에 하난의 빈을 정의한 스코프              |
+
+## 참고
+
+* <http://www.incodom.kr/spring/Bean>
+* <http://unabated.tistory.com/entry/Spring-Bean-Scope?category=524163>

@@ -1,14 +1,14 @@
 --- 
 layout: archive
 comments: false
-permalink: /language/java/framework
-title: "Framework"
+permalink: /language/java/framework/spring
+title: "Java"
 
 sidebar:
   nav: "java"
 ---
 {% for post in site.posts %}
-{% if post.tags contains "java" and post.tags contains "framework" %}
+{% if post.tags contains "java" and post.tags contains "framework" and post.tags contains "spring" %}
 <div class="list__item">
   <h2 class="archive__item-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
   <p class="page__meta">
