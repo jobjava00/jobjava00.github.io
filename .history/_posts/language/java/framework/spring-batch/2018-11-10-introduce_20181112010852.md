@@ -1,0 +1,77 @@
+---
+layout: archive
+title: "[Spring Batch] 소개"
+date: 2018-11-11
+excerpt: ""
+tags: [language, java, framework, spring-batch, Spring Batch 소개]
+category: [language/java/framework/spring-batch]
+#read_time: true
+#share: true
+
+sidebar:
+  nav: "java-framework"
+---
+
+# 정리
+
+* * *
+
+## Spring Batch 사용 이유
+
+* 대용량 배치에 맞는 읽기방식과 Transaction처리를 간단히 구현
+* 실패 시 재시도 처리등 다양한 기능 제공 및 모니터링 가능
+
+## 스프링 배치 기능
+
+* Job Repository 를 통한 배치 모니터링
+* 배치에 적합한 트랜잭션 처리를 위해 주기적인 commit방식 지원
+* 배치작업의 재시도, 재시작, 건너뛰기 등의 정책을 설정으로 적용
+* Commit 개수, Rollback 개수, 재시도 횟수 등 배치실행 통계 정보를 제공
+
+## 스프링 배치 구성요소
+
+![introduce01](/assets/image/language/java/framework/spring-batch/introduce01.png)
+
+### Job
+
+* JobParameter
+  * 배치잡을 시작하는데 사용하는 파라미터의 집합으로 잡이 실행되는 동안에 잡을 식별하거나 잡에서 참조하는 데이터로 사용.
+* JobInstance
+  * 논리적인 Job 실행
+  * JobInstance=Job+JobParameter
+* JobExecution
+  * 단 한 번 시도되는 Job 실행을 의미하는 기술적인 개념
+  * 시작시간, 종료시간 ,상태(시작됨,완료,실패),종료상태의 속성을 가짐
+* JobRepository
+  * 수행되는 Job에 대한 정보를 담고 있는 저장소.
+  * 어떠한 Job이 언제 수행되었고, 언제 끝났으며, 몇 번이 실행되었고 실행에 대한 결과가 어떤지 등의 Batch수행과 관련된 모든 meta data가 저장
+
+### Step
+
+* Step
+  * Batch job을 구성하는 독립적인 하나의 단계
+  * Job은 하나이상의 step으로 구성
+  * 실제 배치 처리 과정을 정의하고, 제어하는데 필요한 모든 정보를 포함
+* Step Execution
+  * 하나의 step을 실행하는 한번의 시도.
+  * 시작시간, 종료시간,상태, 종료상태, commitCount, itemCount 의 속성을 가진다.
+
+### Item
+
+* Item
+  * 처리할 데이터의 가장 작은 구성 요소.
+  * (예)파일의 한 줄, DB의 한 Row, Xml의 특정 element )
+* ItemReader
+  * Step안에서 File 또는 DB등에서 Item을 읽어 들인다
+  * 더 이상 읽어올 Item이 없을 때에는 read()메소드에서 null값을 반환. 그 전까지는 순차적인 값을 리턴
+* ItemWriter
+  * Step안에서 File 또는 DB등으로 Item을 저장
+* Item Processor
+  * Item reader에서 읽어 들인 Item에 대하여 필요한 로직처리 작업을 수행한다.
+* Chunk
+  * 하나의 Transaction안에서 처리할 Item의 덩어리.
+  * chunk size가 10이라면 하나의 transaction안에서 10개의 item에 대한 처리를 하고 commit을 하게 되는 것
+  
+## 참고
+
+* <http://wiki.gurubee.net/pages/viewpage.action?pageId=4949437>
