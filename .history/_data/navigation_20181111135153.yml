@@ -29,12 +29,6 @@ java:
       - title: "Spring"
         url: /language/java/framework/spring/
 
-java-framework:
-  - title: "Spring"
-    url: /language/java/framework/spring
-  - title: "Spring-Batch"
-    url: /language/java/framework/spring-batch
-
 algorithm:
   - title: "Codility"
     url: /algorithm/codility/

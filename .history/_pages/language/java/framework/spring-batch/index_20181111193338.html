@@ -8,7 +8,7 @@ sidebar:
   nav: "java"
 ---
 {% for post in site.posts %}
-{% if post.category contains "language/java/framework/spring" %}
+{% if post.tags contains "java" and post.tags contains "framework" and post.tags contains "spring" %}
 <div class="list__item">
   <h2 class="archive__item-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
   <p class="page__meta">
