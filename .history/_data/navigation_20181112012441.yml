@@ -25,6 +25,9 @@ java:
     url: /language/java/basic/
   - title: "Framework"
     url: /language/java/framework/
+    children:
+      - title: "Spring"
+        url: /language/java/framework/spring/
 
 java-framework:
   - title: "Spring"
