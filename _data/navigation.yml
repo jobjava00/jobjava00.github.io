@@ -29,6 +29,8 @@ java:
     url: /language/java/basic/
   - title: "Framework"
     url: /language/java/framework/
+  - title: "Library"
+    url: /language/java/library/
 
 javascript:
   - title: "Basic"

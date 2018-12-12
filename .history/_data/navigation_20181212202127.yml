@@ -1,5 +1,7 @@
 # main links
 main:
+  - title: "Basic"
+    url: /basic/
   - title: "Language"
     url: /language/
   - title: "Algorithm"
@@ -17,15 +19,30 @@ book:
 language:
   - title: "Java"
     url: /language/java/
+  - title: "JavaScript"
+    url: /language/javascript/
+  - title: "DB"
+    url: /language/db/
 
 java:
   - title: "Basic"
     url: /language/java/basic/
   - title: "Framework"
     url: /language/java/framework/
-    children:
-      - title: "spring"
-        url: /language/java/framework/spring/
+  - title: "Library"
+    url: /language/java/library/
+
+javascript:
+  - title: "Basic"
+    url: /language/javascript/basic/
+  - title: "Vuejs"
+    url: /language/javascript/vuejs/
+
+java-framework:
+  - title: "Spring"
+    url: /language/java/framework/spring/
+  - title: "Spring Batch"
+    url: /language/java/framework/spring-batch/
 
 algorithm:
   - title: "Codility"
