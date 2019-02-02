@@ -8,6 +8,8 @@ main:
     url: /algorithm/
   - title: "Book"
     url: /book/
+  - title: "Tool"
+    url: /tool/
 
 book:
   - title: "Book"
@@ -23,6 +25,10 @@ language:
     url: /language/javascript/
   - title: "DB"
     url: /language/db/
+
+tool:
+  - title: "Jenkins"
+    url: /tool/jenkins/
 
 java:
   - title: "Basic"
