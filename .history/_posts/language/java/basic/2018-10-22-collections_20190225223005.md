@@ -120,6 +120,7 @@ sidebar:
     * hashCode()와 eqauls()메서드를 사용해서 key-value 값을 저장할 위치를 결졍하고 HashMap에서 값을 꺼내올때도 사용
     * 만약 이 메서드들이 올바르게 구현되지 않았다면 다른 두개의 Key가 같은 hashCode() 및 eqauls() 결과를 내놓을 수 있고 이는 value 값들을 잘못된 의도하지 않은 값으로 덮어 씌울 가능성이 있다.
     * equals()와 hashCode()의 구현은 아래 기본룰을 따라야 된다.
+
     ``` markdown
     If o1.equals(o2), then o1.hashCode() == o2.hashCode() should always be true.
     If o1.hashCode() == o2.hashCode is true,
