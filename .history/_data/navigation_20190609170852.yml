@@ -8,6 +8,8 @@ main:
     url: /algorithm/
   - title: "Book"
     url: /book/
+  - title: "Tool"
+    url: /tool/
 
 book:
   - title: "Book"
@@ -15,6 +17,10 @@ book:
     children:
       - title: "xUnit 테스트 패턴"
         url: /book/xunit/
+      - title: "쿠버네티스 기초다지기"
+        url: /book/kubernetes-basic/
+      - title: "Effective Java 3/E"
+        url: /book/effective-java-3e/
 
 language:
   - title: "Java"
@@ -23,6 +29,10 @@ language:
     url: /language/javascript/
   - title: "DB"
     url: /language/db/
+
+tool:
+  - title: "Jenkins"
+    url: /tool/jenkins/
 
 java:
   - title: "Basic"

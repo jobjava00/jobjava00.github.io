@@ -19,6 +19,8 @@ book:
         url: /book/xunit/
       - title: "쿠버네티스 기초다지기"
         url: /book/kubernetes-basic/
+      - title: "Effective Java 3/E"
+        url: /book/effective-java-3e/
 
 language:
   - title: "Java"
