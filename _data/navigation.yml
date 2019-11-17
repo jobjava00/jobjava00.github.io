@@ -21,6 +21,8 @@ book:
         url: /book/kubernetes-basic/
       - title: "Effective Java 3/E"
         url: /book/effective-java-3e/
+      - title: "Kotlin in Action"
+        url: /book/kotlin-in-action/
 
 language:
   - title: "Java"
